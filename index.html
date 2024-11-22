@@ -1,1 +1,173 @@
 
+<html><head><base href="initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carol Rosa Pratas</title>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(45deg, #ff69b4, #ffc0cb);
+    font-family: 'Arial', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: url('fundo1.jpg') center/cover;
+    opacity: 0.3;
+}
+
+.logo-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.logo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    box-shadow: 0 0 20px #ff1493;
+    animation: pulse 2s infinite;
+}
+
+.neon-title {
+    font-size: 2.5em;
+    color: #fff;
+    text-shadow: 0 0 10px #ff1493,
+                 0 0 20px #ff1493,
+                 0 0 30px #ff1493;
+    animation: neonFlicker 1.5s infinite alternate;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.hearts {
+    position: fixed;
+    top: -10%;
+    z-index: 1;
+    animation: fall linear infinite;
+}
+
+.content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(255, 20, 147, 0.5);
+}
+
+.button {
+    display: inline-block;
+    padding: 15px 30px;
+    margin: 10px;
+    border-radius: 25px;
+    background: linear-gradient(45deg, #ff1493, #ff69b4);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(255, 20, 147, 0.5);
+    transition: all 0.3s ease;
+    animation: buttonGlow 2s infinite;
+}
+
+.button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(255, 20, 147, 0.8);
+}
+
+@keyframes neonFlicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        text-shadow: 0 0 10px #ff1493,
+                     0 0 20px #ff1493,
+                     0 0 30px #ff1493;
+    }
+    20%, 22%, 24%, 55% {
+        text-shadow: none;
+    }
+}
+
+@keyframes fall {
+    0% { transform: translateY(-10%) rotate(0deg); }
+    100% { transform: translateY(100vh) rotate(360deg); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes buttonGlow {
+    0% { box-shadow: 0 0 15px rgba(255, 20, 147, 0.5); }
+    50% { box-shadow: 0 0 25px rgba(255, 20, 147, 0.8); }
+    100% { box-shadow: 0 0 15px rgba(255, 20, 147, 0.5); }
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    color: white;
+    text-shadow: 0 0 5px #ff1493;
+}
+</style>
+</head>
+<body>
+
+<div class="background-container"></div>
+
+<!-- Corações animados -->
+<script>
+function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'hearts';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+    heart.innerHTML = '💗';
+    heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+    document.body.appendChild(heart);
+    
+    setTimeout(() => {
+        heart.remove();
+    }, 5000);
+}
+
+setInterval(createHeart, 300);
+</script>
+
+<div class="logo-container">
+    <img src="logo.jpg" alt="Carol Rosa Pratas Logo" class="logo">
+</div>
+
+<h1 class="neon-title">Carol Rosa Pratas</h1>
+
+<div class="content">
+    <h2>✨ Bem-vinda ao Mundo das Joias de Prata ✨</h2>
+    <p>Descubra nossa coleção exclusiva de joias em prata, onde cada peça conta uma história única de elegância e sofisticação.</p>
+    
+    <p>🌟 Peças delicadas e modernas para todos os momentos</p>
+    <p>💎 Qualidade premium em prata 925</p>
+    <p>🎁 Presentes especiais para ocasiões únicas</p>
+
+    <a href="https://api.whatsapp.com/send?phone=5513974173380" class="button">
+        💬 Fale Conosco no WhatsApp
+    </a>
+    
+    <a href="https://www.instagram.com/pratas.carol22?igsh=cnFucnlmbDl0dWs2" class="button">
+        📸 Ver Nossa Coleção no Instagram
+    </a>
+</div>
+
+<footer class="footer">
+    <p>Desenvolvido com 💖 por e-cardstudio</p>
+    <p>© 2024 Carol Rosa Pratas - Todos os direitos reservados</p>
+</footer>
+
+</body></html>
