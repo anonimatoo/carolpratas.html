@@ -98,6 +98,18 @@ body {
     text-align: center;
 }
 
+.payment-methods {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.credit-card-logos {
+    max-width: 300px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
 .whatsapp-button {
     background: #25d366;
     color: white;
@@ -117,23 +129,33 @@ body {
     max-width: 600px;
     margin: 20px auto;
     padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
     display: none;
 }
 
 .form-group {
-    margin-bottom: 15px;
+    position: relative;
+    margin-bottom: 20px;
 }
 
 .form-group label {
-    display: block;
-    margin-bottom: 5px;
+    color: #333;
+    font-weight: bold;
 }
 
 .form-group input {
     width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #ff0000;
+    outline: none;
 }
 
 .submit-button {
@@ -339,11 +361,13 @@ body {
 }
 
 #cardFlag {
-    display: inline-block;
-    margin-left: 10px;
-    vertical-align: middle;
-    font-weight: bold;
-    color: #333;
+    margin-top: 10px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    background: #f8f8f8;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
 
 #cardFlag svg {
@@ -359,11 +383,10 @@ body {
 
 <div class="container">
     <img src="logo.jpg" alt="PneuStore Logo" class="logo">
-    <img src="BlackFriday.jpg" alt="Black Friday" class="blackfriday-banner">
+    <img src="BlackFriday.png" alt="Black Friday" class="blackfriday-banner">
     
     <div class="sale-text">
-        <p>QUEIMA DE ESTOQUE ATÉ 10 DE DEZEMBRO!
-        ÚLTIMAS UNIDADES APROVEITEM</p>
+        <p>QUEIMA DE ESTOQUE ATÉ 5 DE DEZEMBRO!</p>
     </div>
 
     <div class="product-grid">
@@ -509,11 +532,14 @@ body {
     </div>
 
     <div class="contact-footer">
+        <div class="payment-methods">
+            <img src="cartoes.jpg" alt="Aceitamos todos os cartões" class="credit-card-logos">
+        </div>
         <a href="https://wa.me/5513974173380" class="whatsapp-button">Suporte via WhatsApp</a>
         <a href="https://www.reclameaqui.com.br/empresa/pneustore/" class="reclameaqui-button">
             <img src="reclameaqui.jpg" alt="Reclame Aqui">
         </a>
-        <p>Site Seguro</p>
+        <p>Authentic Seguro</p>
         <p>CNPJ: 55.318.730/0001-27</p>
         <button class="privacy-policy-btn" onclick="showPrivacyPolicy()">Política de Privacidade</button>
     </div>
@@ -639,7 +665,6 @@ document.getElementById('cardNumber').addEventListener('input', function(e) {
     let value = e.target.value.replace(/\D/g, '');
     const cardFlag = document.getElementById('cardFlag');
     
-    // Add SVG icons for card flags
     const flagIcons = {
         visa: `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" style="fill:#1A1F71;">
             <path d="M14.5 4h-13C.673 4 0 4.673 0 5.5v13c0 .827.673 1.5 1.5 1.5h13c.827 0 1.5-.673 1.5-1.5v-13c0-.827-.673-1.5-1.5-1.5zm-7.266 11.716l-2.236-5.993h2.871l1.397 3.759 1.397-3.759h2.871l-2.236 5.993h-4.064z"/>
@@ -648,6 +673,12 @@ document.getElementById('cardNumber').addEventListener('input', function(e) {
             <circle cx="7" cy="12" r="6" fill="#eb001b"/>
             <circle cx="17" cy="12" r="6" fill="#f79e1b"/>
             <path d="M12 17.5a6 6 0 010-11" fill="#ff5f00"/>
+        </svg>`,
+        elo: `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="#00A4E0"/>
+        </svg>`,
+        amex: `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
+            <path d="M14.5 4h-13C.673 4 0 4.673 0 5.5v13c0 .827.673 1.5 1.5 1.5h13c.827 0 1.5-.673 1.5-1.5v-13c0-.827-.673-1.5-1.5-1.5z" fill="#006FCF"/>
         </svg>`
     };
 
@@ -660,6 +691,10 @@ document.getElementById('cardNumber').addEventListener('input', function(e) {
             cardFlag.innerHTML = flagIcons.visa + ' Visa';
         } else if(bin.startsWith('5')) {
             cardFlag.innerHTML = flagIcons.mastercard + ' Mastercard';
+        } else if(bin.startsWith('6')) {
+            cardFlag.innerHTML = flagIcons.elo + ' Elo';
+        } else if(bin.startsWith('3')) {
+            cardFlag.innerHTML = flagIcons.amex + ' American Express';
         } else {
             cardFlag.innerHTML = '🎴 Bandeira não identificada';
         }
