@@ -1,191 +1,136 @@
 <html><head><base href="." />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hamburgueria Seo Damasco</title>
+<title>Hamburgueria Seo Damasco - Wallpaper</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
 body {
     margin: 0;
     padding: 0;
-    background: black;
-    color: white;
-    font-family: 'Permanent Marker', cursive;
-    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background-image: url('fundo.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    font-family: 'Permanent Marker', cursive;
+    overflow: hidden;
 }
 
 .container {
-    position: relative;
+    background: rgba(0, 0, 0, 0.7);
+    width: 100%;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: 20px;
-    background: rgba(0,0,0,0.7);
-}
-
-.logo {
-    width: 150px;
-    height: 150px;
-    margin: 20px auto;
-    display: block;
-    border-radius: 50%;
-    box-shadow: 0 0 20px #ff0000;
-    animation: pulse 2s infinite;
+    box-sizing: border-box;
 }
 
 .title {
-    text-align: center;
     font-size: 2.5em;
-    margin: 20px 0;
-    text-shadow: 
-        0 0 5px #fff,
-        0 0 10px #fff,
-        0 0 20px #ff0000,
-        0 0 40px #ff0000,
-        0 0 80px #ff0000;
-    animation: neonFlicker 1.5s infinite alternate;
-}
-
-.slogan {
     text-align: center;
-    font-size: 1.5em;
     margin: 20px 0;
     color: #fff;
     text-shadow: 
-        0 0 5px #00ff00,
-        0 0 10px #00ff00;
-    animation: slideIn 1s ease-out;
+        0 0 7px #ff0000,
+        0 0 10px #ff0000,
+        0 0 21px #ff0000,
+        0 0 42px #ff0000,
+        0 0 82px #ff0000,
+        0 0 92px #ff0000,
+        0 0 102px #ff0000,
+        0 0 151px #ff0000;
+    animation: flicker 1.5s infinite alternate;
 }
 
-.button {
-    display: block;
-    width: 80%;
-    max-width: 300px;
-    margin: 20px auto;
-    padding: 15px;
-    border: none;
-    border-radius: 25px;
+.promo-text {
+    font-size: 1.8em;
+    text-align: center;
+    color: #fff;
+    margin: 30px 0;
+    text-shadow: 
+        0 0 5px #ff0000,
+        0 0 10px #ff0000;
+    animation: pulse 2s infinite;
+}
+
+.contact-button {
+    padding: 15px 30px;
+    font-size: 1.5em;
     background: linear-gradient(45deg, #ff0000, #ff6b6b);
     color: white;
-    font-size: 1.2em;
-    font-family: 'Permanent Marker', cursive;
+    border: none;
+    border-radius: 25px;
     text-decoration: none;
-    text-align: center;
-    transition: all 0.3s;
+    margin-top: 30px;
     box-shadow: 0 0 15px rgba(255,0,0,0.5);
+    transition: all 0.3s ease;
+    font-family: 'Permanent Marker', cursive;
+    animation: float 3s ease-in-out infinite;
 }
 
-.button:active {
+.contact-button:active {
     transform: scale(0.95);
 }
 
-.falling-burger {
-    position: fixed;
-    font-size: 30px;
-    animation: fall linear forwards;
-}
-
-.testimonials {
-    margin-top: 40px;
-    padding: 20px;
-}
-
-.testimonial-card {
-    background: rgba(255,255,255,0.1);
-    border-radius: 15px;
-    padding: 20px;
-    margin: 20px 0;
-    backdrop-filter: blur(5px);
-    animation: fadeIn 1s ease-out;
-}
-
-@keyframes neonFlicker {
-    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
         text-shadow: 
-            0 0 5px #fff,
-            0 0 10px #fff,
-            0 0 20px #ff0000,
-            0 0 40px #ff0000,
-            0 0 80px #ff0000;
+            0 0 7px #ff0000,
+            0 0 10px #ff0000,
+            0 0 21px #ff0000,
+            0 0 42px #ff0000,
+            0 0 82px #ff0000,
+            0 0 92px #ff0000,
+            0 0 102px #ff0000,
+            0 0 151px #ff0000;
     }
-    20%, 22%, 24%, 55% {
+    20%, 24%, 55% {
         text-shadow: none;
     }
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+    0% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.8; }
 }
 
-@keyframes fall {
-    from { transform: translateY(-100vh) rotate(0deg); }
-    to { transform: translateY(100vh) rotate(360deg); }
-}
-
-@keyframes slideIn {
-    from { transform: translateX(-100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
 }
 </style>
 </head>
 <body>
 <div class="container">
-    <img src="logo.jpg" alt="Logo Seo Damasco" class="logo">
-    
     <h1 class="title">HAMBURGUERIA<br>SEO DAMASCO</h1>
     
-    <p class="slogan">Venham conhecer a melhor hambúrgueria da região</p>
-    <p class="slogan">O melhor hambúrguer você encontra aqui!</p>
-
-    <a href="https://wa.me/c/5513996223750" class="button">VER CARDÁPIO</a>
-    <a href="https://www.google.com/maps/search/Rua+dos+Trevos,+298,+Florida,+Praia+Grande+SP,+11709-000,+Brasil" class="button">VER LOCAL</a>
-
-    <div class="testimonials">
-        <div class="testimonial-card">
-            <p>"Melhor hambúrguer que já comi! Suculento e no ponto certo!" - Maria Silva</p>
-        </div>
-        <div class="testimonial-card">
-            <p>"Atendimento excepcional e sabor incomparável!" - João Santos</p>
-        </div>
-        <div class="testimonial-card">
-            <p>"Vale cada centavo! Hambúrguer artesanal de verdade!" - Ana Oliveira</p>
-        </div>
+    <div class="promo-text">
+        Aprimore seu atendimento<br>
+        por apenas R$ 300,00
     </div>
+
+    <a href="https://wa.me/5513974173380" class="contact-button">
+        FALAR COM E-CARDSTUDIO
+    </a>
 </div>
 
 <script>
-function createBurger() {
-    const burger = document.createElement('div');
-    burger.innerHTML = '🍔';
-    burger.className = 'falling-burger';
-    burger.style.left = Math.random() * window.innerWidth + 'px';
-    burger.style.animationDuration = Math.random() * 3 + 2 + 's';
-    document.body.appendChild(burger);
-    
-    burger.addEventListener('animationend', () => {
-        burger.remove();
-    });
-}
+document.querySelector('.contact-button').addEventListener('touchstart', function(e) {
+    this.style.transform = 'scale(0.95)';
+});
 
-setInterval(createBurger, 500);
-
-document.querySelectorAll('.button').forEach(button => {
-    button.addEventListener('touchstart', () => {
-        button.style.transform = 'scale(0.95)';
-    });
-    
-    button.addEventListener('touchend', () => {
-        button.style.transform = 'scale(1)';
-    });
+document.querySelector('.contact-button').addEventListener('touchend', function(e) {
+    this.style.transform = 'scale(1)';
 });
 </script>
 </body></html>
