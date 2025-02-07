@@ -1,28 +1,35 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Weather API Integration
-    const fetchWeatherData = async () => {
-        try {
-            const apiKey = 'YOUR_API_KEY'; // Replace with actual OpenWeatherMap API key
-            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Sao Paulo&appid=${apiKey}&lang=pt_br`);
-            const data = await response.json();
-            
-            if (data.rain) {
-                const weatherAlert = document.getElementById('weather-alert');
-                weatherAlert.innerHTML = `⚠️ Alerta de Chuva: Previsão de ${data.rain['1h']}mm nas próximas horas`;
-                document.getElementById('clima-alerta').style.display = 'block';
-            }
-        } catch (error) {
-            console.error('Erro ao buscar dados de clima:', error);
-        }
-    };
-
-    // Juros Abusivos Modal Trigger
-    const jurosModalTrigger = document.querySelector('[data-bs-target="#jurosModal"]');
-    if (jurosModalTrigger) {
-        jurosModalTrigger.addEventListener('click', () => {
-            new bootstrap.Modal(document.getElementById('jurosModal')).show();
-        });
-    }
-
-    fetchWeatherData();
+document.addEventListener("DOMContentLoaded", () => {
+    fetchCursos();
+    getUserLocation();
 });
+
+function fetchCursos() {
+    fetch("http://localhost:3000/cursos")
+        .then(response => response.json())
+        .then(data => {
+            let coursesList = document.getElementById("courses");
+            data.forEach(course => {
+                let div = document.createElement("div");
+                div.classList.add("course");
+                div.innerHTML = `<h3>${course.nome}</h3><p>${course.descricao}</p><p>Local: ${course.endereco}</p>`;
+                coursesList.appendChild(div);
+            });
+        });
+}
+
+function getUserLocation() {
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            fetch("http://localhost:3000/localizacao", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude
+                })
+            });
+        });
+    } else {
+        alert("Geolocalização não disponível.");
+    }
+}
