@@ -4,75 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cursos Gratuitos - Praia Grande/SP</title>
-    <script src="https://maps.googleapis.com/maps/api/js?key=SUA_API_KEY"></script>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        #map { width: 100%; height: 400px; margin-top: 20px; }
-        .course { border: 1px solid #ddd; padding: 10px; margin: 10px; border-radius: 5px; }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <h1>Cursos Gratuitos em Praia Grande/SP</h1>
-    <p>Veja cursos gratuitos perto de você!</p>
-
-    <h3>Sua Localização:</h3>
-    <p id="user-location">Carregando...</p>
-    
-    <h3>Mapa dos Cursos:</h3>
+    <h1>Cursos Gratuitos em Praia Grande</h1>
+    <p id="status">Carregando sua localização...</p>
     <div id="map"></div>
-
-    <h3>Lista de Cursos:</h3>
+    <h2>Lista de Cursos</h2>
     <div id="courses"></div>
-
-    <script>
-        function getUserLocation() {
-            if ("geolocation" in navigator) {
-                navigator.geolocation.getCurrentPosition((position) => {
-                    let lat = position.coords.latitude;
-                    let lon = position.coords.longitude;
-                    document.getElementById("user-location").innerText = `Latitude: ${lat}, Longitude: ${lon}`;
-
-                    fetch("https://seuservidor.com/localizacao", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ latitude: lat, longitude: lon })
-                    });
-
-                    loadCourses(lat, lon);
-                });
-            } else {
-                alert("Seu navegador não suporta geolocalização.");
-            }
-        }
-
-        function loadCourses(userLat, userLon) {
-            fetch("https://seuservidor.com/cursos")
-                .then(response => response.json())
-                .then(courses => {
-                    let coursesList = document.getElementById("courses");
-                    coursesList.innerHTML = "";
-                    
-                    let map = new google.maps.Map(document.getElementById("map"), {
-                        center: { lat: userLat, lng: userLon },
-                        zoom: 12
-                    });
-
-                    courses.forEach(course => {
-                        let courseDiv = document.createElement("div");
-                        courseDiv.classList.add("course");
-                        courseDiv.innerHTML = `<h4>${course.nome}</h4><p>${course.descricao}</p><p>Local: ${course.endereco}</p>`;
-                        coursesList.appendChild(courseDiv);
-
-                        let marker = new google.maps.Marker({
-                            position: { lat: course.lat, lng: course.lon },
-                            map: map,
-                            title: course.nome
-                        });
-                    });
-                });
-        }
-
-        window.onload = getUserLocation;
-    </script>
 </body>
 </html>
