@@ -1,160 +1,78 @@
-<html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LuckTech Assessoria - Proteja seus Contratos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <title>Cursos Gratuitos - Praia Grande/SP</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=SUA_API_KEY"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #map { width: 100%; height: 400px; margin-top: 20px; }
+        .course { border: 1px solid #ddd; padding: 10px; margin: 10px; border-radius: 5px; }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="logo.jpg" alt="LuckTech Assessoria" height="50">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#servicos">Serviços</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contato">Contato</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <h1>Cursos Gratuitos em Praia Grande/SP</h1>
+    <p>Veja cursos gratuitos perto de você!</p>
 
-    <header class="banner text-white text-center">
-        <div class="container">
-            <h1>Proteja seus Contratos com a LuckTech Assessoria</h1>
-            <p>Consultoria jurídica especializada para sua segurança</p>
-            <a href="#servicos" class="btn btn-primary btn-lg mt-3">Conheça Nossos Serviços</a>
-        </div>
-    </header>
+    <h3>Sua Localização:</h3>
+    <p id="user-location">Carregando...</p>
+    
+    <h3>Mapa dos Cursos:</h3>
+    <div id="map"></div>
 
-    <section id="sobre" class="py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h2>Quem Somos</h2>
-                    <p>A LuckTech Assessoria é especializada em proteger seus interesses através de consultoria jurídica precisa e personalizada.</p>
-                    <p>CNPJ: 58.127.449/0001-03</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <h3>Lista de Cursos:</h3>
+    <div id="courses"></div>
 
-    <section id="servicos" class="py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center mb-4">Nossos Serviços</h2>
-            <div class="row">
-                <div class="col-md-3 mb-3">
-                    <div class="card h-100 service-card">
-                        <div class="card-body">
-                            <i class="fas fa-file-contract mb-3"></i>
-                            <h5 class="card-title">Criação e Revisão de Contratos</h5>
-                            <p class="card-text">Análise detalhada e elaboração de contratos seguros</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-3">
-                    <div class="card h-100 service-card">
-                        <div class="card-body">
-                            <i class="fas fa-percent mb-3"></i>
-                            <h5 class="card-title">Juros Abusivos</h5>
-                            <p class="card-text">Identificação e combate a práticas financeiras irregulares</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-3">
-                    <div class="card h-100 service-card">
-                        <div class="card-body">
-                            <i class="fas fa-balance-scale mb-3"></i>
-                            <h5 class="card-title">Consultoria Jurídica</h5>
-                            <p class="card-text">Orientação personalizada para cada caso</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-3">
-                    <div class="card h-100 service-card">
-                        <div class="card-body">
-                            <i class="fas fa-home mb-3"></i>
-                            <h5 class="card-title">Assessoria em Locações</h5>
-                            <p class="card-text">Suporte completo para locadores e locatários</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <script>
+        function getUserLocation() {
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    let lat = position.coords.latitude;
+                    let lon = position.coords.longitude;
+                    document.getElementById("user-location").innerText = `Latitude: ${lat}, Longitude: ${lon}`;
 
-    <section id="consultoria" class="py-5">
-        <div class="container">
-            <h2 class="text-center mb-4">Trabalhe Conosco</h2>
-            <div class="row">
-                <div class="col-md-6 mx-auto text-center">
-                    <h3>Seja um Consultor</h3>
-                    <p>Oportunidade para profissionais especializados em locação e suporte administrativo.</p>
-                    <p>Oferecemos parceria com advogados para casos mais complexos.</p>
-                    <a href="#contato" class="btn btn-outline-primary">Horario de Atendimento das 09:00 as 18:00</a>
-                </div>
-            </div>
-        </div>
-    </section>
+                    fetch("https://seuservidor.com/localizacao", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ latitude: lat, longitude: lon })
+                    });
 
-    <section id="clima-alerta" class="py-3 bg-warning text-center">
-        <div class="container">
-            <div id="weather-alert"></div>
-        </div>
-    </section>
+                    loadCourses(lat, lon);
+                });
+            } else {
+                alert("Seu navegador não suporta geolocalização.");
+            }
+        }
 
-    <footer class="bg-dark text-white py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h4>LuckTech Assessoria</h4>
-                    <p>CNPJ: 58.127.449/0001-03</p>
-                    <p>&copy; 2023 Todos os direitos reservados</p>
-                </div>
-                <div class="col-md-6 text-end">
-                    <a href="https://wa.me/5513991052512" target="_blank" class="btn btn-success me-2">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </a>
-                    <a href="https://www.facebook.com/share/161nnpM2eu/" target="_blank" class="btn btn-primary">
-                        <i class="fab fa-facebook"></i> Facebook
-                    </a>
-                </div>
-            </div>
-        </div>
-    </footer>
+        function loadCourses(userLat, userLon) {
+            fetch("https://seuservidor.com/cursos")
+                .then(response => response.json())
+                .then(courses => {
+                    let coursesList = document.getElementById("courses");
+                    coursesList.innerHTML = "";
+                    
+                    let map = new google.maps.Map(document.getElementById("map"), {
+                        center: { lat: userLat, lng: userLon },
+                        zoom: 12
+                    });
 
-    <div class="whatsapp-float">
-        <a href="https://wa.me/5513991052512" target="_blank" class="btn btn-success">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-    </div>
+                    courses.forEach(course => {
+                        let courseDiv = document.createElement("div");
+                        courseDiv.classList.add("course");
+                        courseDiv.innerHTML = `<h4>${course.nome}</h4><p>${course.descricao}</p><p>Local: ${course.endereco}</p>`;
+                        coursesList.appendChild(courseDiv);
 
-    <div class="modal fade" id="jurosModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Juros Abusivos: O que Você Precisa Saber</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Juros abusivos podem comprometer significativamente suas finanças. Nossa equipe identifica e combate práticas financeiras irregulares.</p>
-                    <p>Saiba seus direitos e proteja seu patrimônio com a LuckTech Assessoria.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+                        let marker = new google.maps.Marker({
+                            position: { lat: course.lat, lng: course.lon },
+                            map: map,
+                            title: course.nome
+                        });
+                    });
+                });
+        }
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+        window.onload = getUserLocation;
+    </script>
 </body>
 </html>
