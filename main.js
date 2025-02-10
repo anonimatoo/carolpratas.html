@@ -64,7 +64,7 @@ function handleSubmit(event) {
   
   const formData = new FormData(event.target);
   const message = formatWhatsAppMessage(formData);
-  const whatsappNumber = '13991052512';
+  const whatsappNumber = '13974034322';
   
   // Criar link do WhatsApp e redirecionar
   const whatsappUrl = `https://api.whatsapp.com/send?phone=55${whatsappNumber}&text=${encodeURIComponent(message)}`;
